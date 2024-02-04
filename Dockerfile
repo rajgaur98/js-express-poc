@@ -10,6 +10,8 @@ COPY package*.json ./
 # Install project dependencies
 RUN npm install
 
+RUN npm install -g nodemon
+
 # Copy project files
 COPY . .
 
@@ -17,4 +19,4 @@ COPY . .
 EXPOSE 3000
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["nodemon", "-L", "start"]

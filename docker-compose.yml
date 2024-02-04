@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   db:
     image: mysql:8
@@ -25,6 +25,8 @@ services:
       - NODE_ENV=development
     networks:
       - my-network
+    volumes:
+      - ./src:/app/src
 
 networks:
   my-network:
