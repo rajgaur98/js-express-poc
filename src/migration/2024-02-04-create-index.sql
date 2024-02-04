@@ -1,0 +1,1 @@
+alter table mydb.tours add index idx_tours_name (name);
