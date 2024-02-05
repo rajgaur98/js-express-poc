@@ -55,3 +55,20 @@ insert ignore into mydb.matches (name, tourId, format, startTime, endTime) value
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('IND vs WI', 3, 'ODI', '2023-06-12 10:00:00', '2023-06-12 23:00:00');
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('IND vs WI', 3, 'ODI', '2023-06-14 10:00:00', '2023-06-14 23:00:00');
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('KER vs JFC', 4, 'soccer', '2022-04-09 18:00:00', '2022-04-09 23:00:00');
+
+-- Create index on tours.name for faster search (problem 2)
+alter table mydb.tours add index idx_tours_name (name);
+
+-- News table (problem 3)
+create table if not exists mydb.news
+(
+    id int auto_increment not null primary key,
+    title varchar(100) not null,
+    description text not null,
+    tourId int not null,
+    matchId int,
+    recUpdatedAt timestamp not null default current_timestamp on update current_timestamp,
+    createdAt timestamp not null default current_timestamp,
+    foreign key (tourId) references tours(id),
+    foreign key (matchId) references matches(id)
+);
